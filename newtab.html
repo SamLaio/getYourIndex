@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>getYourIndex</title>
+    <link rel="stylesheet" href="newtab.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card">
+        <p class="eyebrow">getYourIndex</p>
+        <h1>要怎麼開這個新分頁？</h1>
+        <p class="copy" id="status">
+          你可以執行瀏覽器原本的動作、開啟瀏覽器首頁，或直接去你自己設定的網址。
+        </p>
+
+        <div class="choices">
+          <button class="choice" id="native-btn" type="button">
+            <span class="title">1. 執行原本瀏覽器的動作</span>
+            <span class="desc">盡量回到瀏覽器內建的新分頁行為。</span>
+          </button>
+
+          <button class="choice" id="home-btn" type="button">
+            <span class="title">2. 開啟瀏覽器設定的首頁</span>
+            <span class="desc">Firefox 可直接讀取；其他瀏覽器會盡量找最接近的行為。</span>
+          </button>
+
+          <button class="choice" id="custom-btn" type="button">
+            <span class="title">3. 開啟自行設定的網址</span>
+            <span class="desc" id="custom-desc">先輸入一個網址，之後就能直接開啟。</span>
+          </button>
+        </div>
+
+        <form id="custom-form" class="form">
+          <label for="custom-url">自行設定的網址</label>
+          <input
+            id="custom-url"
+            name="custom-url"
+            type="text"
+            placeholder="https://example.com"
+            inputmode="url"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="actions">
+            <button type="submit">儲存</button>
+            <button type="button" id="clear-btn" class="ghost">清除</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="newtab.js"></script>
+  </body>
+</html>

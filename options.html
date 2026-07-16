@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>getYourIndex 設定</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card">
+        <p class="eyebrow">getYourIndex</p>
+        <h1>要怎麼開啟這個新分頁？</h1>
+        <p class="lede">
+          這裡只是在設定外掛行為。按下分頁列上的 <span>+</span> 之後，瀏覽器仍會先走原本的新分頁流程，
+          只有你選了第 2 或第 3 項時，背景腳本才會把它接過來。
+        </p>
+
+        <p id="browser-note" class="note" aria-live="polite"></p>
+
+        <form id="options-form" class="form">
+          <div class="choices" role="radiogroup" aria-label="新分頁選項">
+            <input id="mode-native" name="launch-mode" type="radio" value="native" />
+            <label for="mode-native" class="choice">
+              <span class="choice-head">
+                <span class="choice-index">1</span>
+                <span class="choice-title">執行原本瀏覽器的動作</span>
+                <span class="picked">目前選取</span>
+              </span>
+              <span class="choice-desc">不改變瀏覽器本來的新分頁行為。</span>
+            </label>
+
+            <input id="mode-homepage" name="launch-mode" type="radio" value="homepage" />
+            <label for="mode-homepage" class="choice">
+              <span class="choice-head">
+                <span class="choice-index">2</span>
+                <span class="choice-title">開啟瀏覽器設定的首頁</span>
+                <span class="picked">目前選取</span>
+              </span>
+              <span class="choice-desc">Firefox 可直接讀取首頁設定；其他瀏覽器若沒有對應 API，就只能保留原本行為。</span>
+            </label>
+
+            <input id="mode-custom" name="launch-mode" type="radio" value="custom" />
+            <label for="mode-custom" class="choice">
+              <span class="choice-head">
+                <span class="choice-index">3</span>
+                <span class="choice-title">開啟自行設定的網址</span>
+                <span class="picked">目前選取</span>
+              </span>
+              <span class="choice-desc" id="custom-summary">先填入網址，之後新分頁就會直接開啟這裡。</span>
+            </label>
+          </div>
+
+          <section id="custom-wrap" class="custom" hidden>
+            <label for="custom-url">自行設定的網址</label>
+            <input
+              id="custom-url"
+              name="custom-url"
+              type="text"
+              placeholder="https://example.com"
+              inputmode="url"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </section>
+
+          <div class="actions">
+            <button type="submit">儲存</button>
+            <button type="button" id="clear-btn" class="ghost">清除自訂網址</button>
+          </div>
+
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

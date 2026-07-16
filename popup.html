@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>getYourIndex</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <h1>getYourIndex</h1>
+      <p class="hint">這裡改的是第三個選項會直接開啟的網址。</p>
+
+      <form id="popup-form" class="form">
+        <label for="popup-url">自訂網址</label>
+        <input
+          id="popup-url"
+          name="popup-url"
+          type="text"
+          placeholder="https://example.com"
+          inputmode="url"
+          autocomplete="off"
+          spellcheck="false"
+        />
+
+        <div class="actions">
+          <button type="submit">儲存</button>
+          <button type="button" id="clear-btn" class="ghost">清除</button>
+        </div>
+      </form>
+
+      <p id="status" class="status"></p>
+    </main>
+
+    <script src="common.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
