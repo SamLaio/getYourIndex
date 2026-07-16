@@ -1,11 +1,12 @@
 $ErrorActionPreference = 'Stop'
 
 $root = $PSScriptRoot
+$release = Join-Path $root 'release'
 $stage = Join-Path $root '_firefox_dev_pack'
 $manifest = Join-Path $root 'manifest.firefox.dev.json'
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$zipPath = Join-Path $root "getYourIndex-firefox-dev-$stamp.zip"
-$xpiPath = Join-Path $root "getYourIndex-firefox-dev-$stamp.xpi"
+$zipPath = Join-Path $release "getYourIndex-firefox-dev-$stamp.zip"
+$xpiPath = Join-Path $release "getYourIndex-firefox-dev-$stamp.xpi"
 
 if (-not (Test-Path -LiteralPath $manifest)) {
   throw "Missing manifest: $manifest"
@@ -16,6 +17,7 @@ if (Test-Path -LiteralPath $stage) {
 }
 
 New-Item -ItemType Directory -Path $stage | Out-Null
+New-Item -ItemType Directory -Path $release -Force | Out-Null
 
 try {
   $files = @(

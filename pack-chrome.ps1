@@ -2,10 +2,9 @@ $ErrorActionPreference = 'Stop'
 
 $root = $PSScriptRoot
 $release = Join-Path $root 'release'
-$stage = Join-Path $root '_firefox_pack'
-$manifest = Join-Path $root 'manifest.firefox.json'
-$zipPath = Join-Path $release 'getYourIndex-firefox.zip'
-$xpiPath = Join-Path $release 'getYourIndex-firefox.xpi'
+$stage = Join-Path $root '_chrome_pack'
+$manifest = Join-Path $root 'manifest.chrome.json'
+$zipPath = Join-Path $release 'getYourIndex-chrome.zip'
 
 if (-not (Test-Path -LiteralPath $manifest)) {
   throw "Missing manifest: $manifest"
@@ -41,14 +40,9 @@ try {
     Remove-Item -LiteralPath $zipPath -Force
   }
 
-  if (Test-Path -LiteralPath $xpiPath) {
-    Remove-Item -LiteralPath $xpiPath -Force
-  }
-
   Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zipPath
-  Copy-Item -LiteralPath $zipPath -Destination $xpiPath -Force
 
-  Get-Item -LiteralPath $zipPath, $xpiPath | Select-Object Name, Length
+  Get-Item -LiteralPath $zipPath | Select-Object Name, Length
 }
 finally {
   if (Test-Path -LiteralPath $stage) {

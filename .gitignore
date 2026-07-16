@@ -1,5 +1,9 @@
 TASK_HANDOFF.md
+AGENTS.md
+manifest.json
+release/
+_chrome_pack/
 _firefox_pack/
 _firefox_dev_pack/
-getYourIndex-firefox*.zip
-getYourIndex-firefox*.xpi
+getYourIndex-*.zip
+getYourIndex-*.xpi

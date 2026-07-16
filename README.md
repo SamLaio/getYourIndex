@@ -15,17 +15,17 @@
 ### Chrome
 
 1. 打開 `chrome://extensions`
-2. 先執行 `use-chrome.ps1`
+2. 執行 `pack-chrome.ps1`
 3. 開啟「開發人員模式」
-4. 選「載入未封裝項目」
-5. 指向這個資料夾
+4. 將 `release/getYourIndex-chrome.zip` 解壓縮到測試資料夾
+5. 選「載入未封裝項目」並指向解壓縮後的資料夾
 
 ### Firefox
 
 1. 打開 `about:debugging#/runtime/this-firefox`
-2. 先執行 `use-firefox.ps1`
+2. 執行 `pack-firefox.ps1`
 3. 選「載入暫時附加元件」
-4. 指向這個資料夾裡的 `manifest.json`
+4. 指向 `release/getYourIndex-firefox.xpi`
 
 ## 使用
 
@@ -38,7 +38,7 @@
 
 - 瀏覽器首頁讀取需要 `browserSettings`，目前主要是 Firefox 可完整支援
 - 自訂網址目前只接受 `http://`、`https://`，以及 `about:blank`
-- Chrome 和 Firefox 需要不同的 manifest；Firefox 用目前預設 `manifest.json`，Chrome 請先切到 Chrome 版
+- Chrome 和 Firefox 需要不同的 manifest；打包腳本會各自使用正確版本
 
 ## License
 
