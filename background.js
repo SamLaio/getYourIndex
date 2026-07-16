@@ -12,6 +12,21 @@ async function updateTabUrl(tabId, targetUrl) {
   }
 }
 
+async function openOptions() {
+  if (ext.runtime.openOptionsPage) {
+    try {
+      await promisifyCall(ext.runtime.openOptionsPage.bind(ext.runtime));
+      return;
+    } catch {
+      // Fall back to opening the options file directly.
+    }
+  }
+
+  await promisifyCall(ext.tabs.create.bind(ext.tabs), {
+    url: ext.runtime.getURL("options.html"),
+  });
+}
+
 function isNewTabUrl(url) {
   const value = String(url ?? "").trim().toLowerCase();
   return (
@@ -48,6 +63,7 @@ ext.tabs.onUpdated.addListener((tabId, changeInfo) => {
   handleNewTab(tabId, changeInfo.url).catch(() => {});
 });
 
-ext.action?.onClicked?.addListener(() => {
-  Promise.resolve(ext.runtime.openOptionsPage?.()).catch(() => {});
+const actionApi = ext.action ?? ext.browserAction;
+actionApi?.onClicked?.addListener(() => {
+  openOptions().catch(() => {});
 });
