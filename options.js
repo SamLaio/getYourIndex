@@ -99,11 +99,6 @@ optionsForm.addEventListener("submit", async (event) => {
         setStatus("需要 browserSettings 權限才能讀取首頁設定。", true);
         return;
       }
-
-      if (!(await getBrowserHomepageUrl())) {
-        setStatus("Firefox 回傳的是內建首頁，外掛不能直接開啟。請改用第 3 項自訂網址。", true);
-        return;
-      }
     }
   }
 

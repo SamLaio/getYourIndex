@@ -11,9 +11,17 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage", "tabs", "browserSettings"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "getyourindex@samliao",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["common.js", "background.js"]
   },
   "options_ui": {
     "page": "options.html",

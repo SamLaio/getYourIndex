@@ -11,8 +11,7 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
-  "permissions": ["storage", "tabs"],
-  "optional_permissions": ["browserSettings"],
+  "permissions": ["storage", "tabs", "browserSettings"],
   "browser_specific_settings": {
     "gecko": {
       "id": "getyourindex@samliao",
