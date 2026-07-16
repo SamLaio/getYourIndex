@@ -19,7 +19,7 @@ It keeps the browser's native new tab flow and lets users choose what happens ne
 Features:
 
 - Keep the browser's native new tab page
-- Choose whether to leave new tabs alone, open the browser homepage, or open a saved custom URL
+- Choose whether to leave new tabs alone, open the browser homepage when supported, or open a saved custom URL
 - Open the browser homepage when supported
 - Open a custom URL you save locally
 - Works in both Chrome and Firefox
@@ -27,10 +27,10 @@ Features:
 
 How it works:
 
-- Open the extension options page to choose one of three actions
+- Open the extension options page to choose an available action
 - Save a custom URL locally from the options page
 - Firefox can read the browser homepage when the permission is granted
-- Chrome keeps the native behavior when browser homepage access is not exposed
+- Chrome hides the browser-homepage option because homepage access is not exposed
 
 ## Chrome Web Store Keywords
 
@@ -38,7 +38,7 @@ new tab, homepage, start page, custom homepage, browser extension, chrome extens
 
 ## Firefox Add-ons Summary
 
-Choose what happens after a new tab opens: browser default, browser homepage, or your own saved URL.
+Choose what happens after a new tab opens: browser default, supported browser homepage, or your own saved URL.
 
 ## Permissions Explanation
 

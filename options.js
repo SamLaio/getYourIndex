@@ -1,7 +1,10 @@
 const optionsForm = document.getElementById("options-form");
 const modeInputs = [...document.querySelectorAll('input[name="launch-mode"]')];
+const homepageInput = document.getElementById("mode-homepage");
+const homepageChoice = document.querySelector('label[for="mode-homepage"]');
 const customWrap = document.getElementById("custom-wrap");
 const customInput = document.getElementById("custom-url");
+const customIndex = document.querySelector('label[for="mode-custom"] .choice-index');
 const customSummary = document.getElementById("custom-summary");
 const browserNote = document.getElementById("browser-note");
 const clearBtn = document.getElementById("clear-btn");
@@ -28,22 +31,40 @@ function syncCustomSummary(url) {
     : "先填入網址，之後新分頁就會直接開啟這裡。";
 }
 
+function supportsHomepageMode() {
+  return Boolean(ext.browserSettings?.homepageOverride?.get);
+}
+
+function syncHomepageAvailability() {
+  const supported = supportsHomepageMode();
+  homepageInput.hidden = !supported;
+  homepageInput.disabled = !supported;
+  homepageChoice.hidden = !supported;
+  customIndex.textContent = supported ? "3" : "2";
+}
+
 async function syncBrowserNote() {
-  const supported = Boolean(ext.browserSettings?.homepageOverride?.get);
+  const supported = supportsHomepageMode();
   if (supported) {
     const granted = await hasBrowserSettingsPermission();
     browserNote.textContent = granted
       ? "Firefox 可以直接讀取首頁設定。"
-      : "Firefox 可以直接讀取首頁設定；如果要用第 2 項，按儲存時請允許 browserSettings 權限。";
+      : "Firefox 可以直接讀取首頁設定；如果要用首頁選項，按儲存時請允許 browserSettings 權限。";
     return;
   }
 
-  browserNote.textContent = "Chrome 目前沒有對應的首頁讀取 API，第二個選項在這裡會保留原本行為。";
+  browserNote.textContent = "這個瀏覽器沒有可讀取首頁的 API，所以只提供原本動作與自訂網址。";
 }
 
 async function loadSettings() {
-  const { launchMode, homeUrl } = await getLaunchSettings();
+  syncHomepageAvailability();
+
+  let { launchMode, homeUrl } = await getLaunchSettings();
   savedHomeUrl = homeUrl;
+
+  if (launchMode === LAUNCH_MODES.homepage && !supportsHomepageMode()) {
+    launchMode = await setLaunchMode(LAUNCH_MODES.native);
+  }
 
   const current = modeInputs.find((input) => input.value === launchMode) ?? modeInputs[0];
   current.checked = true;
@@ -93,12 +114,15 @@ optionsForm.addEventListener("submit", async (event) => {
   }
 
   if (launchMode === LAUNCH_MODES.homepage) {
-    if (ext.browserSettings?.homepageOverride?.get) {
-      const granted = (await hasBrowserSettingsPermission()) || (await requestBrowserSettingsPermission());
-      if (!granted) {
-        setStatus("需要 browserSettings 權限才能讀取首頁設定。", true);
-        return;
-      }
+    if (!supportsHomepageMode()) {
+      setStatus("這個瀏覽器無法讀取首頁設定，請改用自訂網址。", true);
+      return;
+    }
+
+    const granted = (await hasBrowserSettingsPermission()) || (await requestBrowserSettingsPermission());
+    if (!granted) {
+      setStatus("需要 browserSettings 權限才能讀取首頁設定。", true);
+      return;
     }
   }
 
@@ -109,11 +133,6 @@ optionsForm.addEventListener("submit", async (event) => {
 
   savedHomeUrl = saved.homeUrl;
   syncCustomSummary(saved.homeUrl);
-  if (launchMode === LAUNCH_MODES.homepage && !ext.browserSettings?.homepageOverride?.get) {
-    setStatus("已儲存，但這個瀏覽器沒有讀取首頁的 API，所以按 + 會維持原本行為。");
-    return;
-  }
-
   setStatus("已儲存。");
 });
 
