@@ -25,12 +25,13 @@
 1. 打開 `about:debugging#/runtime/this-firefox`
 2. 執行 `pack-firefox.ps1`
 3. 選「載入暫時附加元件」
-4. 指向 `release/getYourIndex-firefox.xpi`
+4. 指向 `release/getYourIndex-firefox-v<version>.xpi`
 
 ## 使用
 
 - 按下 `+` 仍然會先走瀏覽器原本的新分頁流程
 - 只接管瀏覽器原生新分頁，不接管網頁另開視窗或彈窗
+- 接管後會讓焦點落在開啟的網頁，不停在網址列
 - 在外掛選項頁選擇要接手的模式
 - 右上角擴充功能圖示會打開設定頁
 - 第三個選項可以直接設定自訂網址

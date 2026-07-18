@@ -4,8 +4,9 @@ $root = $PSScriptRoot
 $release = Join-Path $root 'release'
 $stage = Join-Path $root '_firefox_pack'
 $manifest = Join-Path $root 'manifest.firefox.json'
+$version = (Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json).version
 $zipPath = Join-Path $release 'getYourIndex-firefox.zip'
-$xpiPath = Join-Path $release 'getYourIndex-firefox.xpi'
+$xpiPath = Join-Path $release "getYourIndex-firefox-v$version.xpi"
 
 if (-not (Test-Path -LiteralPath $manifest)) {
   throw "Missing manifest: $manifest"

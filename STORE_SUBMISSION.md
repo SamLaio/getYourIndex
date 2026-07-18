@@ -3,7 +3,7 @@
 ## 基本資料
 
 - Name: `getYourIndex`
-- Version: `0.4`
+- Version: `0.5`
 - Author: `SamLiao`
 
 ## 簡短描述
@@ -20,6 +20,7 @@
 
 - 保留瀏覽器原生的新分頁流程
 - 只接管瀏覽器原生新分頁，不接管網頁另開視窗或彈窗
+- 接管後會讓焦點落在開啟的網頁，不停在網址列
 - 可選擇維持原本動作、開啟瀏覽器首頁（支援時），或開啟自訂網址
 - Firefox 可讀取瀏覽器設定的首頁
 - Chrome 會隱藏不支援的首頁選項
@@ -50,7 +51,7 @@ new tab, homepage, start page, custom homepage, browser extension, chrome extens
 ## 打包說明
 
 - Chrome 版請使用 Chrome manifest 打包。
-- Firefox / AMO 上架版請使用 Firefox manifest 打包。
+- Firefox / AMO 上架版請使用 Firefox manifest 打包，XPI 會輸出為版本化檔名。
 
 ## 隱私說明
 
