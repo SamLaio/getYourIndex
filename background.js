@@ -30,8 +30,6 @@ async function openOptions() {
 function isNewTabUrl(url) {
   const value = String(url ?? "").trim().toLowerCase();
   return (
-    !value ||
-    value === "about:blank" ||
     value === "about:newtab" ||
     value.startsWith("chrome://newtab") ||
     value.startsWith("edge://newtab")

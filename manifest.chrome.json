@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "getYourIndex",
   "short_name": "getYourIndex",
-  "version": "0.3",
+  "version": "0.4",
   "author": "SamLiao",
   "description": "Configure what happens when a new tab is opened.",
   "icons": {
